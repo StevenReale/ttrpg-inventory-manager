@@ -36,7 +36,11 @@ public class JdbcItemDao implements ItemDao {
             Item item = mapRowToItem(results);
             items.add(item);
         }
+        for (Item item : items) {
+            System.out.println(itemToString(item));
+        }
         return items;
+
     }
 
     @Override
@@ -59,6 +63,9 @@ public class JdbcItemDao implements ItemDao {
         jdbcTemplate.update(sql, itemId);
     }
 
+    public String itemToString(Item item) {
+        return "Item ID: " + item.getItemId() + ", Item Name: " + item.getItemName() + ", Item Description: " + item.getItemDescription() + ", Item Effect: " + item.getItemEffect() + ", Item Value: " + item.getItemValue();
+    }
     private Item mapRowToItem(SqlRowSet results) {
         Item item = new Item();
         item.setItemId(results.getInt("item_id"));
