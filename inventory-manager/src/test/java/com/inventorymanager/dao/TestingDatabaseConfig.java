@@ -26,12 +26,12 @@ public class TestingDatabaseConfig {
         adminDataSource.setUsername("postgres");
         adminDataSource.setPassword("postgres1");
         JdbcTemplate adminJdbcTemplate = new JdbcTemplate(adminDataSource);
-        adminJdbcTemplate.update("DROP DATABASE IF EXISTS \"PizzaShopLiteTesting\";");
-        adminJdbcTemplate.update("CREATE DATABASE \"PizzaShopLiteTesting\";");
+        adminJdbcTemplate.update("DROP DATABASE IF EXISTS \"InventoryManagerTest\";");
+        adminJdbcTemplate.update("CREATE DATABASE \"InventoryManagerTest\";");
 
         // Setup up the testing connection
         SingleConnectionDataSource dataSource = new SingleConnectionDataSource();
-        dataSource.setUrl("jdbc:postgresql://localhost:5432/PizzaShopLiteTesting");
+        dataSource.setUrl("jdbc:postgresql://localhost:5432/InventoryManagerTest");
         dataSource.setUsername("postgres");
         dataSource.setPassword("postgres1");
         dataSource.setAutoCommit(false); // So we can rollback after each test.
@@ -46,7 +46,7 @@ public class TestingDatabaseConfig {
     public void cleanup() {
 
         if (adminDataSource != null) {
-            adminJdbcTemplate.update("DROP DATABASE \"PizzaShopLiteTesting\";");
+            adminJdbcTemplate.update("DROP DATABASE \"InventoryManagerTest\";");
             adminDataSource.destroy();
         }
     }
