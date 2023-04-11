@@ -24,6 +24,7 @@ public class JdbcItemDao implements ItemDao {
         if (results.next()) {
             item = mapRowToItem(results);
         }
+        System.out.println(itemToString(item));
         return item;
     }
 
