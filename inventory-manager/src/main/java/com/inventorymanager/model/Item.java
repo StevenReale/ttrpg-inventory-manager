@@ -10,6 +10,18 @@ public class Item {
     private String item_effect;
     private double item_value;
 
+    public Item () {
+
+    }
+
+    public Item(int itemId, String item_name, String item_description, String item_effect, double item_value) {
+        this.itemId = itemId;
+        this.item_name = item_name;
+        this.item_description = item_description;
+        this.item_effect = item_effect;
+        this.item_value = item_value;
+    }
+
     public int getItemId() {
         return itemId;
     }

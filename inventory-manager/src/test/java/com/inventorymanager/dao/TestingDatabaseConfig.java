@@ -7,36 +7,53 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.SingleConnectionDataSource;
 import org.springframework.jdbc.datasource.init.ScriptUtils;
 
+import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.sql.DataSource;
 import java.sql.SQLException;
+import java.util.Objects;
 
 @Configuration
 public class TestingDatabaseConfig {
 
+    // To use an existing PostgreSQL database, set the following environment variables.
+    // Otherwise, a temporary database will be created on the local machine.
+    private static final String DB_HOST =
+            Objects.requireNonNullElse(System.getenv("DB_HOST"), "localhost");
+    private static final String DB_PORT =
+            Objects.requireNonNullElse(System.getenv("DB_PORT"), "5432");
+    private static final String DB_NAME =
+            Objects.requireNonNullElse(System.getenv("DB_NAME"), "InventoryManagerTest");
+    private static final String DB_USER =
+            Objects.requireNonNullElse(System.getenv("DB_USER"), "postgres");
+    private static final String DB_PASSWORD =
+            Objects.requireNonNullElse(System.getenv("DB_PASSWORD"), "postgres1");
+
+
     private SingleConnectionDataSource adminDataSource;
     private JdbcTemplate adminJdbcTemplate;
 
+    @PostConstruct
+    public void setup() {
+        if (System.getenv("DB_HOST") == null) {
+            adminDataSource = new SingleConnectionDataSource();
+            adminDataSource.setUrl("jdbc:postgresql://localhost:5432/postgres");
+            adminDataSource.setUsername("postgres");
+            adminDataSource.setPassword("postgres1");
+            adminJdbcTemplate = new JdbcTemplate(adminDataSource);
+            adminJdbcTemplate.update("DROP DATABASE IF EXISTS \"" + DB_NAME + "\";");
+            adminJdbcTemplate.update("CREATE DATABASE \"" + DB_NAME + "\";");
+        }
+    }
+
     @Bean
     public DataSource dataSource() throws SQLException {
-
-        // Drop and then recreate the testing database under separate "admin" connection
-        adminDataSource = new SingleConnectionDataSource();
-        adminDataSource.setUrl("jdbc:postgresql://localhost:5432/postgres");
-        adminDataSource.setUsername("postgres");
-        adminDataSource.setPassword("postgres1");
-        JdbcTemplate adminJdbcTemplate = new JdbcTemplate(adminDataSource);
-        adminJdbcTemplate.update("DROP DATABASE IF EXISTS \"InventoryManagerTest\";");
-        adminJdbcTemplate.update("CREATE DATABASE \"InventoryManagerTest\";");
-
-        // Setup up the testing connection
         SingleConnectionDataSource dataSource = new SingleConnectionDataSource();
-        dataSource.setUrl("jdbc:postgresql://localhost:5432/InventoryManagerTest");
-        dataSource.setUsername("postgres");
-        dataSource.setPassword("postgres1");
-        dataSource.setAutoCommit(false); // So we can rollback after each test.
+        dataSource.setUrl(String.format("jdbc:postgresql://%s:%s/%s", DB_HOST, DB_PORT, DB_NAME));
+        dataSource.setUsername(DB_USER);
+        dataSource.setPassword(DB_PASSWORD);
+        dataSource.setAutoCommit(false); //So we can rollback after each test.
 
-        // Refresh the testing database by running the setup script
         ScriptUtils.executeSqlScript(dataSource.getConnection(), new ClassPathResource("InventoryManagerTest.sql"));
 
         return dataSource;
@@ -44,9 +61,8 @@ public class TestingDatabaseConfig {
 
     @PreDestroy
     public void cleanup() {
-
         if (adminDataSource != null) {
-            adminJdbcTemplate.update("DROP DATABASE \"InventoryManagerTest\";");
+            adminJdbcTemplate.update("DROP DATABASE \"" + DB_NAME + "\";");
             adminDataSource.destroy();
         }
     }
