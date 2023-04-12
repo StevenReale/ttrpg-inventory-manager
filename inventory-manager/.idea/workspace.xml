@@ -25,13 +25,13 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "last_opened_file_path": "C:/Users/Student/workspace/ttrpg-inventory-manager/inventory-manager"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Student/workspace/ttrpg-inventory-manager/inventory-manager&quot;
   }
-}]]></component>
-  <component name="RunManager">
+}</component>
+  <component name="RunManager" selected="Application.App">
     <configuration name="App" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.inventorymanager.App" />
       <module name="inventory-manager" />
@@ -45,9 +45,25 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="JdbcItemDaoTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="inventory-manager" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.inventorymanager.dao.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.inventorymanager.dao" />
+      <option name="MAIN_CLASS_NAME" value="com.inventorymanager.dao.JdbcItemDaoTests" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="Application.App" />
+        <item itemvalue="JUnit.JdbcItemDaoTests" />
       </list>
     </recent_temporary>
   </component>

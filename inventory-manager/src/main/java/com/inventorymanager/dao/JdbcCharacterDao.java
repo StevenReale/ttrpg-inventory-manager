@@ -42,15 +42,18 @@ public class JdbcCharacterDao implements CharacterDao {
     }
 
     @Override
-    public void addCharacter(Character character) {
+    public Character createCharacter(Character character) {
         String sql = "INSERT INTO character (character_name, character_class, character_level, character_description) VALUES (?, ?, ?, ?)";
-        jdbcTemplate.update(sql, character.getCharacterName(), character.getCharacterClass(), character.getCharacterLevel(), character.getCharacterDescription());
+        int CharacterId = jdbcTemplate.queryForObject(sql, Integer.class, character.getCharacterName(), character.getCharacterClass(), character.getCharacterLevel(), character.getCharacterDescription());
+        character.setCharacterId(CharacterId);
+        return character;
     }
 
     @Override
-    public void updateCharacter(Character character) {
+    public boolean updateCharacter(Character character) {
         String sql = "UPDATE character SET character_name = ?, character_class = ?, character_level = ?, character_description = ? WHERE character_id = ?";
-        jdbcTemplate.update(sql, character.getCharacterName(), character.getCharacterClass(), character.getCharacterLevel(), character.getCharacterDescription(), character.getCharacterId());
+        return jdbcTemplate.update(sql, character.getCharacterName(), character.getCharacterClass(), character.getCharacterLevel(), character.getCharacterDescription(), character.getCharacterId()) > 0;
+
     }
 
     @Override

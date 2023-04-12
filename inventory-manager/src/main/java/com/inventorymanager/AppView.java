@@ -41,6 +41,89 @@ public class AppView {
         return selectedCharacter;
     }
 
+    public Character createCharacter(Character currentCharacter) {
+
+        Character newCharacter = null;
+
+        console.printMessage("Enter new character information");
+        console.printDivider();
+        String name = console.promptForString("Character name: ");
+        String characterClass = console.promptForString("Character class: ");
+        int level = console.promptForInteger("Character level: ");
+        String description = console.promptForString("Character description: ");
+        console.printDivider();
+
+        console.printBlankLine();
+        boolean createNewCharacter = console.promptForYesNo("Are you sure you wish to create the new character (Y/N)?: ");
+        if (createNewCharacter) {
+            newCharacter = new Character();
+            newCharacter.setCharacterName(name);
+            newCharacter.setCharacterClass(characterClass);
+            newCharacter.setCharacterLevel(level);
+            newCharacter.setCharacterDescription(description);
+        }
+        return newCharacter;
+    }
+
+    public void displayCharacter(Character character) {
+        console.printMessage("Current character information");
+        console.printDivider();
+        displayCharacterInfo(character);
+    }
+
+    public void displayProposedUpdate(Character character){
+        console.printMessage("Proposed update to character");
+        console.printDivider();
+        displayCharacterInfo(character);
+    }
+
+    public void displayCharacterInfo(Character character) {
+        console.printMessage("Character ID: " + character.getCharacterId());
+        console.printMessage("Character Name: " + character.getCharacterName());
+        console.printMessage("Character Class: " + character.getCharacterClass());
+        console.printMessage("Character Level: " + character.getCharacterLevel());
+        console.printMessage("Character Description: " + character.getCharacterDescription());
+        console.printDivider();
+    }
+
+    public Character updateCharacter(Character character) {
+        displayCharacter(character);
+        console.printDivider();
+
+        console.printBlankLine();
+        console.printMessage("Update character information");
+        console.printDivider();
+        Character updatedCharacter = new Character();
+        updatedCharacter.setCharacterId(character.getCharacterId());
+        updatedCharacter.setCharacterName(defaultOnEnter(console.promptForString("Name: "), character.getCharacterName()));
+        updatedCharacter.setCharacterClass(defaultOnEnter(console.promptForString("Class: "), character.getCharacterClass()));
+        updatedCharacter.setCharacterLevel(defaultOnEnter(console.promptForInteger("Level: "), character.getCharacterLevel()));
+        updatedCharacter.setCharacterDescription(defaultOnEnter(console.promptForString("Description: "), character.getCharacterDescription()));
+        console.printDivider();
+
+        displayProposedUpdate(updatedCharacter);
+        console.printDivider();
+
+        console.printBlankLine();
+        boolean updateCharacter = console.promptForYesNo("Are you sure you wish to update the character (Y/N)?: ");
+        if (updateCharacter) {
+            return updatedCharacter;
+        } else {
+            return null;
+        }
+    }
+
+    public boolean deleteCharacter(Character character) {
+        displayCharacter(character);
+        console.printDivider();
+
+        console.printBlankLine();
+        boolean deleteCharacter = console.promptForYesNo("Are you sure you wish to delete the character (Y/N)?: ");
+        return deleteCharacter;
+    }
+
+    //Item methods
+
     public Item getItemSelection(List<Item> items) {
         Item selectedItem = null;
 
