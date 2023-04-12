@@ -14,4 +14,3 @@ This program is intended to help manage and keep track of items and/or resources
 1. Integration tests for JdbcItemDao complete
 
 ## Known bugs
-1. Upon selecting a character and then selecting items for that characters, the item list is not displaying correctly
