@@ -1,4 +1,4 @@
-package com.inventorymanager.dao;
+package com.inventorymanager.dao.DaoTestingResources;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

@@ -12,5 +12,6 @@ This program is intended to help manage and keep track of items and/or resources
 
 ## Completed tasks
 1. Integration tests for JdbcItemDao complete
+2. Integration tests for JdbcCharacterDao complete
 
 ## Known bugs

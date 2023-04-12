@@ -28,6 +28,8 @@ CREATE TABLE character (
 );
 
 INSERT INTO character (character_name, character_class, character_level, character_description) VALUES ('Char 1', 'Monk', 10, 'A Known Tester');
+INSERT INTO character (character_name, character_class, character_level, character_description) VALUES ('Char 2', 'Thief', 12, 'A Known Hester');
+INSERT INTO character (character_name, character_class, character_level, character_description) VALUES ('Char 3', 'Fighter', 14, 'A Known Lester');
 
 CREATE TABLE character_item (
    character_id integer NOT NULL,
