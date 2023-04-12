@@ -42,21 +42,25 @@ public class JdbcCharacterDao implements CharacterDao {
     }
 
     @Override
-    public void addCharacter(Character character) {
-        String sql = "INSERT INTO character (character_name, character_class, character_level, character_description) VALUES (?, ?, ?, ?)";
-        jdbcTemplate.update(sql, character.getCharacterName(), character.getCharacterClass(), character.getCharacterLevel(), character.getCharacterDescription());
+    public Character addCharacter(Character character) {
+        String sql = "INSERT INTO character (character_name, character_class, character_level, character_description) VALUES (?, ?, ?, ?) RETURNING character_id";
+        int charId = jdbcTemplate.queryForObject(sql, Integer.class, character.getCharacterName(), character.getCharacterClass(), character.getCharacterLevel(), character.getCharacterDescription());
+        character.setCharacterId(charId);
+        return character;
     }
 
     @Override
-    public void updateCharacter(Character character) {
+    public boolean updateCharacter(Character character) {
         String sql = "UPDATE character SET character_name = ?, character_class = ?, character_level = ?, character_description = ? WHERE character_id = ?";
-        jdbcTemplate.update(sql, character.getCharacterName(), character.getCharacterClass(), character.getCharacterLevel(), character.getCharacterDescription(), character.getCharacterId());
+        return jdbcTemplate.update(sql, character.getCharacterName(), character.getCharacterClass(), character.getCharacterLevel(), character.getCharacterDescription(), character.getCharacterId()) > 0;
     }
 
     @Override
     public void deleteCharacter(int characterId) {
-        String sql = "DELETE FROM character WHERE character_id = ?";
-        jdbcTemplate.update(sql, characterId);
+        String sql1 = "DELETE FROM character_item WHERE character_id = ?";
+        jdbcTemplate.update(sql1, characterId);
+        String sql2 = "DELETE FROM character WHERE character_id = ?";
+        jdbcTemplate.update(sql2, characterId);
     }
 
     private Character mapRowToCharacter(SqlRowSet rowSet) {

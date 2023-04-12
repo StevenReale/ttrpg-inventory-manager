@@ -10,6 +10,13 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
@@ -25,13 +32,12 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "last_opened_file_path": "C:/Users/Student/workspace/ttrpg-inventory-manager/inventory-manager"
-  }
-}]]></component>
-  <component name="RunManager">
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+  </component>
+  <component name="RunManager" selected="JUnit.JdbcCharacterDaoTests">
     <configuration name="App" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.inventorymanager.App" />
       <module name="inventory-manager" />
@@ -45,8 +51,50 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="All in inventory-manager" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="inventory-manager" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="TEST_OBJECT" value="package" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="JdbcCharacterDaoTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="inventory-manager" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.inventorymanager.dao.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.inventorymanager.dao" />
+      <option name="MAIN_CLASS_NAME" value="com.inventorymanager.dao.JdbcCharacterDaoTests" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="JdbcItemDaoTests.getItem_returns_null_item_for_invalid_id" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="inventory-manager" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.inventorymanager.dao.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.inventorymanager.dao" />
+      <option name="MAIN_CLASS_NAME" value="com.inventorymanager.dao.JdbcItemDaoTests" />
+      <option name="METHOD_NAME" value="getItem_returns_null_item_for_invalid_id" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.JdbcCharacterDaoTests" />
+        <item itemvalue="JUnit.All in inventory-manager" />
+        <item itemvalue="JUnit.JdbcItemDaoTests.getItem_returns_null_item_for_invalid_id" />
         <item itemvalue="Application.App" />
       </list>
     </recent_temporary>

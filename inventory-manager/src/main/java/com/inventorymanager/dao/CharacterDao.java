@@ -10,9 +10,9 @@ public interface CharacterDao {
 
     List<Character> getAllCharacters();
 
-    void addCharacter(Character character);
+    Character addCharacter(Character character);
 
-    void updateCharacter(Character character);
+    boolean updateCharacter(Character character);
 
     void deleteCharacter(int characterId);
 
