@@ -61,4 +61,9 @@ public class Item {
     public void setItemValue(double item_value) {
         this.item_value = item_value;
     }
+
+    @Override
+    public String toString() {
+        return "Item ID: " + itemId + " | Item Name: " + item_name + " | Item Description: " + item_description + " | Item Effect: " + item_effect + " | Item Value: " + item_value;
+    }
 }
