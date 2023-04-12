@@ -8,6 +8,18 @@ public class Character {
     private int character_level;
     private String character_description;
 
+    public Character() {
+
+    }
+
+    public Character(int characterId, String character_name, String character_class, int character_level, String character_description) {
+        this.characterId = characterId;
+        this.character_name = character_name;
+        this.character_class = character_class;
+        this.character_level = character_level;
+        this.character_description = character_description;
+    }
+
     public int getCharacterId() {
         return characterId;
     }
