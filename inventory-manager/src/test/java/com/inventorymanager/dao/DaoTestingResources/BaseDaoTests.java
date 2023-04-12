@@ -1,4 +1,4 @@
-package com.inventorymanager.dao;
+package com.inventorymanager.dao.DaoTestingResources;
 
 import org.junit.After;
 import org.junit.runner.RunWith;

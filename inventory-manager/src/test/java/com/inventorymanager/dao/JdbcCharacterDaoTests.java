@@ -1,5 +1,6 @@
 package com.inventorymanager.dao;
 
+import com.inventorymanager.dao.DaoTestingResources.BaseDaoTests;
 import com.inventorymanager.model.Character;
 import org.junit.Assert;
 import org.junit.Before;

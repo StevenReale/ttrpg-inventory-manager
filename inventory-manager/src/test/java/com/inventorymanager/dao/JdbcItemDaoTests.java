@@ -1,11 +1,11 @@
 package com.inventorymanager.dao;
 
+import com.inventorymanager.dao.DaoTestingResources.BaseDaoTests;
 import com.inventorymanager.model.Item;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.List;
 
