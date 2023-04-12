@@ -10,7 +10,7 @@ public interface CharacterDao {
 
     List<Character> getAllCharacters();
 
-    Character addCharacter(Character character);
+    Character createCharacter(Character character);
 
     boolean updateCharacter(Character character);
 

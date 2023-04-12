@@ -61,7 +61,7 @@ public class JdbcCharacterDaoTests extends BaseDaoTests {
         newChar.setCharacterLevel(1);
 
         //Act
-        Character createdChar = jdbcCharacterDao.addCharacter(newChar);
+        Character createdChar = jdbcCharacterDao.createCharacter(newChar);
         newChar.setCharacterId(createdChar.getCharacterId());
 
         //Assert

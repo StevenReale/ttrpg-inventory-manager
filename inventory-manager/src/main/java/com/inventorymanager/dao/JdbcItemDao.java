@@ -24,7 +24,6 @@ public class JdbcItemDao implements ItemDao {
         if (results.next()) {
             item = mapRowToItem(results);
         }
-        System.out.println(itemToString(item));
         return item;
     }
 
@@ -36,9 +35,6 @@ public class JdbcItemDao implements ItemDao {
         while (results.next()) {
             Item item = mapRowToItem(results);
             items.add(item);
-        }
-        for (Item item : items) {
-            System.out.println(itemToString(item));
         }
         return items;
 
@@ -62,10 +58,6 @@ public class JdbcItemDao implements ItemDao {
     public void deleteItem(int itemId) {
         String sql = "DELETE FROM item WHERE item_id = ?;";
         jdbcTemplate.update(sql, itemId);
-    }
-
-    public String itemToString(Item item) {
-        return "Item ID: " + item.getItemId() + ", Item Name: " + item.getItemName() + ", Item Description: " + item.getItemDescription() + ", Item Effect: " + item.getItemEffect() + ", Item Value: " + item.getItemValue();
     }
 
     private Item mapRowToItem(SqlRowSet results) {

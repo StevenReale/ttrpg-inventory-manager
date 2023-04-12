@@ -47,7 +47,7 @@ public class AppController {
 
     public void displayMainMenu() {
 
-        final String CHARACTER_SELECT = "Character - select";
+        final String CHARACTER_SELECT = "Character - create, read, update, delete";
         final String ITEM_SELECT = "Item - create, read, update, delete";
         final String EXIT = "Exit the program";
         final String[] MENU_OPTIONS = {CHARACTER_SELECT, ITEM_SELECT, EXIT};
@@ -81,6 +81,73 @@ public class AppController {
                     console.printErrorMessage("No character selected.");
                 }
             } else if (selection.equals(EXIT)) {
+                finished = true;
+            }
+        }
+    }
+
+    private void characterMenu() {
+        final String SELECT = "Select character";
+        final String CREATE = "Create new character";
+        final String UPDATE = "Update selected character";
+        final String DELETE = "Delete selected character";
+        final String RETURN = "Return to Main Menu";
+        final String[] MENU_OPTIONS = {SELECT, CREATE, UPDATE, DELETE, RETURN};
+
+        boolean finished = false;
+        while (!finished) {
+            console.printBlankLine();
+            String title = "Character Menu\n" + selectedBreadCrumbs();
+            String selection = view.getMenuSelection(title, MENU_OPTIONS);
+            console.printDivider();
+            console.printBlankLine();
+
+            if (selection.equals(SELECT)) {
+                List<Character> characters = characterDao.getAllCharacters();
+                Character selectedCharacter = view.getCharacterSelection(characters);
+                if (selectedCharacter == null) {
+                    // Deselect the current character and item
+                    currentCharacter = null;
+                    currentItem = null;
+                } else if (selectedCharacter.equals(currentCharacter) == false) {
+                    // Switch to selected character and deselect item
+                    currentCharacter = selectedCharacter;
+                    currentItem = null;
+                }
+            } else if (selection.equals(CREATE)) {
+                Character newCharacter = view.createCharacter(currentCharacter);
+                if (newCharacter != null) {
+                    newCharacter = characterDao.createCharacter(newCharacter);
+                    console.printBlankLine();
+                    console.printMessage(newCharacter.toString() + " CREATED !!!");
+                    currentCharacter = newCharacter;
+                }
+            } else if (selection.equals(UPDATE)) {
+                if (currentCharacter != null) {
+                    Character updatedCharacter = view.updateCharacter(currentCharacter);
+                    if (updatedCharacter != null) {
+                        if (characterDao.updateCharacter(updatedCharacter)) {
+                            console.printBlankLine();
+                            console.printMessage(updatedCharacter.toString() + " UPDATED !!!");
+                            currentCharacter = updatedCharacter;
+                        }
+                    }
+                } else {
+                    console.printErrorMessage("No character selected.");
+                }
+            } else if (selection.equals(DELETE)) {
+                if (currentCharacter != null) {
+                    if (view.deleteCharacter(currentCharacter)) {
+                        // DAO in action !!!
+                        characterDao.deleteCharacter(currentCharacter.getCharacterId());
+                        console.printBlankLine();
+                        console.printMessage(currentCharacter.toString() + " DELETED !!!");
+                        currentCharacter = null;
+                    }
+                } else {
+                    console.printErrorMessage("No character selected.");
+                }
+            } else if (selection.equals(RETURN)) {
                 finished = true;
             }
         }

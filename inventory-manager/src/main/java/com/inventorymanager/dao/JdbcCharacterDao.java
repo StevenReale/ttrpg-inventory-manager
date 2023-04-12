@@ -42,7 +42,7 @@ public class JdbcCharacterDao implements CharacterDao {
     }
 
     @Override
-    public Character addCharacter(Character character) {
+    public Character createCharacter(Character character) {
         String sql = "INSERT INTO character (character_name, character_class, character_level, character_description) VALUES (?, ?, ?, ?) RETURNING character_id";
         int charId = jdbcTemplate.queryForObject(sql, Integer.class, character.getCharacterName(), character.getCharacterClass(), character.getCharacterLevel(), character.getCharacterDescription());
         character.setCharacterId(charId);
